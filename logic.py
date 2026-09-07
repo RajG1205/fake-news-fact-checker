@@ -272,7 +272,7 @@ Return JSON only:
                 logger.warning("Groq model %s failed: %s", model, exc)
 
         if not data:
-            result = _mock_knowledge_result(claim) or _mock_result_for_unknown(claim)
+            result = _mock_knowledge_result(claim) or {**_mock_result_for_unknown(claim), "sources": sources[:8], "trust_analysis": "Live sources were retrieved, but the analysis model was unavailable; no verdict was fabricated."}
         else:
             verdict = normalize_verdict(data.get("verdict"))
             confidence = max(0, min(100, int(data.get("confidence", 50))))
@@ -296,7 +296,7 @@ Return JSON only:
         return result
     except Exception as exc:
         logger.exception("Fact check failed: %s", exc)
-        result = _mock_knowledge_result(claim) or _mock_result_for_unknown(claim)
+        result = _mock_knowledge_result(claim) or {**_mock_result_for_unknown(claim), "sources": sources[:8] if "sources" in locals() else [], "trust_analysis": "The verification pipeline encountered an error; no verdict was fabricated."}
         _cache_result(key, result)
         return result
 

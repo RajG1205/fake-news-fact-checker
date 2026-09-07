@@ -22,7 +22,43 @@ h1{font:600 clamp(48px,7vw,82px)/.98 Georgia,"Times New Roman",serif;letter-spac
 .footer{margin-top:45px;padding-top:18px;border-top:1px solid var(--line);color:#888a83;font-size:10.5px;max-width:820px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 13px;font-size:11px;z-index:40}
 @media(max-width:650px){.topbar{height:62px}.topbar-inner{padding:0 16px}.quota{font-size:10px;padding-left:10px}.shell{padding:45px 16px 60px}.hero{padding-top:10px;padding-bottom:48px}h1{font-size:49px}.searchbox{grid-template-columns:1fr}.primary{height:48px;margin:0 10px 10px;width:auto}.examples{flex-wrap:wrap}.card{padding:20px}.card-top{grid-template-columns:1fr}.badge{justify-self:start}.statusbar{font-size:9px}.news{display:none}}
 .news-wrap{margin:0 auto 58px;max-width:var(--max)}.news-head{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:13px}.news-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:700;color:var(--muted)}.news-kicker b{color:var(--red);margin-right:6px}.news-title{font:600 28px/1.1 "Source Serif 4",Georgia,serif;margin-top:7px}.news-refresh{border:0;background:none;color:var(--muted);font-size:11px}.news-refresh:hover{color:var(--ink)}.news-grid{display:grid;grid-template-columns:1.25fr .9fr .9fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px}.news-item{background:var(--surface);padding:21px;min-height:155px;text-decoration:none;display:flex;flex-direction:column}.news-item:hover{background:#fafaf7}.news-source{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#8a8c85;margin-bottom:12px}.news-item h3{font:600 18px/1.25 "Source Serif 4",Georgia,serif;margin:0 0 12px}.news-meta{margin-top:auto;font-size:10px;color:#999b94}.news-loading{padding:22px;color:var(--muted);font-size:12px;background:var(--surface);border:1px solid var(--line);margin-top:16px}.live-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#a33a3a;margin:0 5px 1px 0}</style>
-</head>
+<style>
+:root{--bg:#f6f5f1;--surface:#fff;--ink:#12130f;--muted:#74766f;--line:#deddd5;--soft:#f0efe9;--green:#176b4e;--red:#a33b3b;--amber:#8a681e;--blue:#2c566d;--max:1120px}
+body{background:radial-gradient(circle at 50% -20%,#fff 0,#f6f5f1 45%,#f2f1ec 100%);color:var(--ink)}
+.topbar{height:78px;background:rgba(246,245,241,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(210,209,201,.8)}
+.topbar-inner{max-width:var(--max);padding:0 32px}
+.brand{gap:12px}.mark{width:36px;height:36px;border:0;border-radius:11px;background:#11130f;color:#fff;box-shadow:0 7px 18px rgba(17,19,15,.16)}.mark svg{width:23px;height:23px}.brand strong{font:700 19px "Source Serif 4",Georgia,serif}.brand span{opacity:.55}
+.quota{border-left:1px solid var(--line);padding-left:16px}
+.shell{max-width:var(--max);padding:72px 32px 90px}
+.hero{max-width:900px;padding:34px 0 62px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.72);padding:7px 11px;border-radius:999px;font-size:10px;letter-spacing:.13em;box-shadow:0 5px 18px rgba(30,31,27,.04)}
+.eyebrow i{width:6px;height:6px;margin-right:7px}
+h1{font-size:clamp(55px,8vw,94px);line-height:.94;letter-spacing:-.065em;margin:24px auto 23px;max-width:850px}
+h1 em{font-style:normal;color:#6d7069}
+.lead{margin:auto;font-size:16px;line-height:1.7;max-width:650px}
+.searchbox{max-width:850px;margin:38px auto 0;border-radius:18px;border:1px solid #cfcfc6;box-shadow:0 24px 70px rgba(30,31,27,.09);overflow:hidden;background:#fff;transition:.25s}
+.searchbox:focus-within{border-color:#9c9e95;box-shadow:0 28px 80px rgba(30,31,27,.13)}
+textarea{min-height:118px;padding:23px 24px;font-size:15px}
+.primary{margin:10px;width:145px;border-radius:11px;background:#151711;transition:transform .18s,background .18s;box-shadow:0 5px 14px rgba(0,0,0,.12)}
+.primary:hover{background:#2b2d27;transform:translateY(-1px)}
+.examples{justify-content:center;margin-top:16px}.examples:before{content:"Try a check";font-weight:600;letter-spacing:.04em}
+.example{background:#fff;border-radius:999px;padding:7px 11px;transition:.18s}.example:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(0,0,0,.06)}
+.statusbar{background:rgba(255,255,255,.42);padding:14px 17px;border:1px solid var(--line);border-radius:10px;text-transform:none;letter-spacing:.02em;margin-bottom:18px}
+.overview{border:1px solid var(--line);border-left:3px solid var(--ink);background:#fff;border-radius:12px;padding:20px 22px;box-shadow:0 8px 24px rgba(20,21,18,.035)}
+.card{border-radius:15px;padding:30px 32px;margin:14px 0;box-shadow:0 10px 32px rgba(20,21,18,.045);transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(20,21,18,.07)}
+.claim{font-size:25px}.badge{border-radius:999px;padding:6px 10px}
+.highlights{background:#fafaf7;margin-left:-10px;margin-right:-10px;padding:16px 10px;border-radius:9px}
+.source{transition:background .15s;padding:12px 10px;border-radius:6px}.source:hover{background:#f7f7f3;text-decoration:none}
+.news-wrap{max-width:var(--max);margin:0 auto 52px}
+.news-head{align-items:center;padding-bottom:15px}.news-title{font-size:32px}.news-kicker{font-size:10px}.news-grid{grid-template-columns:repeat(4,1fr);gap:1px;border-radius:12px;overflow:hidden;box-shadow:0 10px 32px rgba(20,21,18,.045)}
+.news-item{min-height:190px;padding:22px;position:relative}.news-item:first-child{grid-column:span 2;min-height:230px}.news-item:first-child h3{font-size:24px}.news-item:hover{background:#fff}.news-item:after{content:"↗";position:absolute;right:20px;bottom:18px;color:#aaa}
+.news-source{color:#6e716a;font-weight:700}.news-meta{font-size:10px}
+.live-dot{box-shadow:0 0 0 4px rgba(163,59,59,.09)}
+.footer{max-width:900px;margin:58px auto 0;text-align:center}
+@media(max-width:800px){.news-grid{grid-template-columns:1fr 1fr}.news-item:first-child{grid-column:span 2}.shell{padding-left:18px;padding-right:18px}}
+@media(max-width:650px){.topbar-inner{padding:0 16px}.shell{padding-top:44px}h1{font-size:52px}.hero{text-align:left}.eyebrow{display:inline-flex}.lead{margin:0}.examples{justify-content:flex-start}.news-grid{grid-template-columns:1fr}.news-item:first-child{grid-column:auto}.news-item:first-child h3{font-size:19px}.news-item{min-height:150px}.searchbox{border-radius:14px}.primary{width:auto}.card{padding:22px}.card-top{grid-template-columns:1fr}}
+</style></head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
@@ -51,10 +87,10 @@ h1{font:600 clamp(48px,7vw,82px)/.98 Georgia,"Times New Roman",serif;letter-spac
 
   <section class="news-wrap" aria-labelledby="newsTitle">
     <div class="news-head">
-      <div><div class="news-kicker"><span class="live-dot"></span><b>Live</b> News desk</div><div class="news-title" id="newsTitle">What is moving right now</div></div>
+      <div><div class="news-kicker"><span class="live-dot"></span><b>LIVE</b> · VERIFIED NEWS DESK</div><div class="news-title" id="newsTitle">What the world is talking about</div></div>
       <button class="news-refresh" onclick="loadNews(true)">Refresh ↻</button>
     </div>
-    <div id="newsContent" class="news-loading">Loading the latest headlines…</div>
+    <div id="newsContent" class="news-loading">Loading live headlines…</div>
   </section>
 
   <div class="statusbar"><span id="statusText">Ready for your first fact check.</span><span id="sourceStatus">Evidence reviewed</span></div>
@@ -110,22 +146,21 @@ async function checkClaim(){
  }catch(e){document.getElementById("emptyText").innerHTML=`<span class="error">${esc(e.message||"Verification failed.")}</span>`;empty.classList.add("show");document.getElementById("statusText").textContent="Verification unavailable";}finally{setLoading(false)}
 }
 document.getElementById("claimInput").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")checkClaim()});
+function formatNewsTime(v){if(!v)return"Latest";const d=new Date(v);return Number.isNaN(d.getTime())?v:d.toLocaleString([], {month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});}
 function renderNews(items){
  const box=document.getElementById("newsContent");
- if(!Array.isArray(items)||!items.length){box.textContent="Live headlines are temporarily unavailable.";return}
+ if(!Array.isArray(items)||!items.length){box.className="news-loading";box.textContent="Live headlines are temporarily unavailable.";return}
  box.className="news-grid";
- box.innerHTML=items.slice(0,3).map(n=>'<a class="news-item" href="'+esc(safeUrl(n.url))+'" target="_blank" rel="noopener noreferrer"><div class="news-source">'+esc(n.source||n.domain||"News desk")+'</div><h3>'+esc(n.title||"Latest headline")+'</h3><div class="news-meta">'+esc(n.published||"Latest")+' · Read source ↗</div></a>').join("");
+ box.innerHTML=items.slice(0,8).map((n,i)=>'<a class="news-item" href="'+esc(safeUrl(n.url))+'" target="_blank" rel="noopener noreferrer"><div class="news-source">'+(i===0?'<span class="live-dot"></span> ':'')+esc(n.source||n.domain||"News desk")+' · '+esc(n.category||"World")+'</div><h3>'+esc(n.title||"Latest headline")+'</h3><div class="news-meta">'+esc(formatNewsTime(n.publishedAt||n.published||""))+' · Read source ↗</div></a>').join("");
 }
 async function loadNews(force=false){
  const box=document.getElementById("newsContent");
  if(force){box.className="news-loading";box.textContent="Refreshing live headlines…"}
- try{const res=await fetch("/breaking-news?ts="+Date.now(),{cache:"no-store"});renderNews(await res.json())}
+ try{const res=await fetch("/breaking-news?ts="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("news");renderNews(await res.json())}
  catch(e){box.className="news-loading";box.textContent="Live headlines are temporarily unavailable."}
 }
 loadNews();
 setInterval(loadNews,300000);
-
-
 
 </script>
 </body>

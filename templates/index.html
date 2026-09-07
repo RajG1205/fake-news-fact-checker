@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07090d">
+<meta name="description" content="VerifyAI — evidence-assisted fact checking with live web sources.">
+<title>VerifyAI — Evidence-based fact checking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f4f0;--surface:#fff;--ink:#171816;--muted:#6f716c;--soft:#ecebe6;--line:#d9d8d1;--green:#1d6b4f;--red:#9b3434;--amber:#8a641b;--blue:#264c63;--max:1040px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button,textarea{font:inherit}button{cursor:pointer}a{color:inherit}
+.topbar{height:72px;background:rgba(245,244,240,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}.topbar-inner{height:100%;max-width:var(--max);margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.mark{width:28px;height:28px;border:1.5px solid var(--ink);display:grid;place-items:center;font:700 12px Georgia,serif}.brand strong{font:700 17px Georgia,"Times New Roman",serif;letter-spacing:-.02em}.brand span{font-weight:400}.quota{font-size:12px;color:var(--muted);padding-left:18px;border-left:1px solid var(--line)}.quota-dot{display:none}
+.shell{max-width:var(--max);margin:auto;padding:72px 28px 80px}.hero{max-width:820px;margin:0 auto;padding:25px 0 70px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:700}.eyebrow i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin:0 8px 2px 0}
+h1{font:600 clamp(48px,7vw,82px)/.98 Georgia,"Times New Roman",serif;letter-spacing:-.055em;margin:18px 0 22px;max-width:760px}h1 em{font-style:normal}.lead{max-width:620px;margin:0;color:#666861;font-size:16px}.searchbox{margin-top:36px;background:var(--surface);border:1px solid #cfcfc8;display:grid;grid-template-columns:1fr auto;gap:0;box-shadow:0 10px 30px rgba(26,27,24,.06)}.searchbox:focus-within{border-color:#8c8e86}textarea{resize:none;min-height:112px;max-height:190px;background:transparent;border:0;outline:0;color:var(--ink);padding:19px 20px;font-size:15px;line-height:1.55}textarea::placeholder{color:#999b94}.primary{margin:10px;width:132px;border:0;background:var(--ink);color:#fff;font-size:13px;font-weight:700;align-self:stretch}.primary:hover{background:#30312e}.primary:disabled{opacity:.5;cursor:not-allowed}.examples{display:flex;gap:7px;margin-top:12px;align-items:center}.examples:before{content:"Try";font-size:11px;color:#9a9b95;margin-right:3px}.example{border:0;background:none;color:#777971;padding:2px 0;font-size:11px;text-decoration:underline;text-underline-offset:3px}.example:hover{color:var(--ink)}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:15px 0;color:#7c7e77;font-size:11px;text-transform:uppercase;letter-spacing:.09em;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.statusbar strong{color:var(--ink)}
+.loading,.empty{display:none;background:var(--surface);border:1px solid var(--line);padding:30px;margin-top:20px}.loading.show,.empty.show{display:block}.spinner{width:18px;height:18px;border:2px solid #d7d7d0;border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:10px}@keyframes spin{to{transform:rotate(360deg)}}.loading p,.empty p{margin:0;color:var(--muted);font-size:13px}.error{color:var(--red)}
+.overview{display:none;background:#eeeee8;border-left:3px solid var(--ink);padding:19px 21px;margin:20px 0}.overview.show{display:block}.over-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:#777971;font-weight:700;margin-bottom:5px}.overview-text{font-size:14px;color:#555750}.overview-text strong{color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);padding:27px 28px;margin:12px 0}.card-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}.claim{font:600 23px/1.28 Georgia,"Times New Roman",serif;letter-spacing:-.02em}.badge{white-space:nowrap;padding:4px 8px;border:1px solid;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.true{color:var(--green);border-color:#9bbcae;background:#f5faf7}.false{color:var(--red);border-color:#d7aaaa;background:#fff7f7}.misleading{color:var(--amber);border-color:#d6c28f;background:#fffaf0}.uncertain{color:#666a66;border-color:#b9bbb5;background:#f7f7f4}.meta{display:flex;gap:12px;margin-top:9px;color:#8a8c85;font-size:11px}.confidence{color:#555750}.explain{margin-top:20px;color:#454741;font-size:14px;max-width:820px}.highlights{margin:18px 0 0;padding:16px 0;border-top:1px solid var(--soft);border-bottom:1px solid var(--soft)}.highlights-title{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#777971;font-weight:700;margin-bottom:7px}.highlights ul{margin:0;padding-left:18px;color:#5c5e59;font-size:13px}.highlights li{margin:5px 0}.quote{border-left:1px solid #a4a69e;margin:16px 0 0;padding:3px 0 3px 13px;color:#777971;font:italic 12px/1.5 Georgia,serif}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px}.ghost{border:0;background:none;color:#6f716b;padding:0;font-size:11px}.ghost:hover{color:var(--ink)}.sources{display:none;margin-top:14px;border-top:1px solid var(--soft)}.sources.show{display:block}.source{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--soft);font-size:12px;text-decoration:none;color:#4e504b}.source:hover{text-decoration:underline;text-underline-offset:3px}.source small{color:#999b94;white-space:nowrap}
+.footer{margin-top:45px;padding-top:18px;border-top:1px solid var(--line);color:#888a83;font-size:10.5px;max-width:820px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 13px;font-size:11px;z-index:40}
+@media(max-width:650px){.topbar{height:62px}.topbar-inner{padding:0 16px}.quota{font-size:10px;padding-left:10px}.shell{padding:45px 16px 60px}.hero{padding-top:10px;padding-bottom:48px}h1{font-size:49px}.searchbox{grid-template-columns:1fr}.primary{height:48px;margin:0 10px 10px;width:auto}.examples{flex-wrap:wrap}.card{padding:20px}.card-top{grid-template-columns:1fr}.badge{justify-self:start}.statusbar{font-size:9px}.news{display:none}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/" aria-label="VerifyAI home"><div class="mark">V</div><strong>Verify<span>AI</span></strong></a>
+    <div class="quota"><i class="quota-dot"></i><span id="quotaText">5 fact-checks / day</span></div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div class="eyebrow"><i></i> Evidence-led verification</div>
+    <h1>Check the claim.<br><em>See the evidence.</em></h1>
+    <p class="lead">Submit a statement and review the evidence behind it. VerifyAI compares the claim with current sources and gives you a concise, traceable assessment.</p>
+
+    <div class="searchbox">
+      <textarea id="claimInput" maxlength="5000" rows="2" placeholder="Paste a claim, headline, or statement to verify…"></textarea>
+      <button class="primary" id="checkBtn" onclick="checkClaim()">Check claim</button>
+    </div>
+    <div class="examples">
+      <button class="example" onclick="useExample('Did NASA fake the moon landing?')">Moon landing</button>
+      <button class="example" onclick="useExample('Do vaccines cause autism?')">Vaccine claim</button>
+      <button class="example" onclick="useExample('Is climate change primarily caused by human activity?')">Climate</button>
+      <button class="example" onclick="useExample('Does 5G cause COVID-19?')">5G claim</button>
+    </div>
+  </section>
+
+  <div class="statusbar"><span id="statusText">Ready for your first fact check.</span><span id="sourceStatus">Evidence reviewed</span></div>
+  <div class="line"></div>
+
+  <section class="overview" id="overview"><div class="over-kicker">Assessment</div><div class="overview-text" id="overviewText"></div></section>
+  <section class="loading" id="loading"><div class="spinner"></div><p>Reviewing sources and assessing the claim…</p></section>
+  <section class="empty" id="empty"><p id="emptyText">No result returned. Try a more specific claim.</p></section>
+  <section id="results"></section>
+
+
+  <div class="footer">VerifyAI provides an evidence-assisted assessment, not a guarantee of truth. Always inspect the cited sources for high-stakes decisions.</div>
+</main>
+
+<script>
+let currentResults=[];
+const labels={true:"Verified true",false:"False claim",misleading:"Misleading",uncertain:"Needs verification"};
+const esc=s=>{const d=document.createElement("div");d.textContent=s??"";return d.innerHTML};
+function safeUrl(u){try{const x=new URL(u);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return "#"}}
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function useExample(v){document.getElementById("claimInput").value=v;document.getElementById("claimInput").focus()}
+function setLoading(on){document.getElementById("loading").classList.toggle("show",on);document.getElementById("checkBtn").disabled=on}
+function updateQuota(res){const h=res.headers.get("X-RateLimit-Remaining");if(h!==null)document.getElementById("quotaText").textContent=`${h} fact-check${h==="1"?"":"s"} left today`}
+function renderCard(item,i){
+ const r=item.result||{};const v=(r.verdict||"UNCERTAIN").toLowerCase();const conf=Number.isFinite(Number(r.confidence))?Math.max(0,Math.min(100,Number(r.confidence))):50;
+ const sources=Array.isArray(r.sources)?r.sources:[], hi=Array.isArray(r.highlights)?r.highlights:[], qs=Array.isArray(r.quotes)?r.quotes:[];
+ const sourceHtml=sources.slice(0,6).map(s=>`<a class="source" href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener noreferrer"><span>${esc(s.title||"Evidence source")}</span><small>${esc((s.domain||"").replace(/^www\\./,""))} ↗</small></a>`).join("");
+ return `<article class="card"><div class="card-top"><div class="claim">${esc(item.claim)}</div><span class="badge ${v}">${esc(labels[v]||"Uncertain")}</span></div>
+ <div class="meta"><span class="confidence">${conf}% confidence</span><span>•</span><span class="source-count">${sources.length} source${sources.length===1?"":"s"}</span></div>
+ <div class="explain">${esc(r.explanation||"No detailed explanation was returned.")}</div>
+ ${hi.length?`<div class="highlights"><div class="highlights-title">Key evidence</div><ul>${hi.slice(0,4).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+ ${qs.slice(0,2).map(q=>`<div class="quote">“${esc(q)}”</div>`).join("")}
+ <div class="actions"><button class="ghost" onclick="toggleSources(${i})">View evidence & sources <span id="arrow${i}">↓</span></button><button class="ghost" onclick="copyResult(${i})">Copy result</button></div>
+ <div class="sources" id="sources${i}">${sourceHtml||"<span style='color:var(--dim);font-size:12px'>No source links available.</span>"}</div></article>`;
+}
+function toggleSources(i){const x=document.getElementById("sources"+i);x.classList.toggle("show");document.getElementById("arrow"+i).textContent=x.classList.contains("show")?"↑":"↓"}
+function copyResult(i){const x=currentResults[i],r=x.result||{};navigator.clipboard?.writeText(`Claim: ${x.claim}\nVerdict: ${r.verdict}\nConfidence: ${r.confidence}%\n${r.explanation||""}`).then(()=>toast("Result copied")).catch(()=>toast("Copy unavailable"))}
+async function checkClaim(){
+ const input=document.getElementById("claimInput"),q=input.value.trim();if(!q){toast("Enter a claim first.");input.focus();return}
+ const results=document.getElementById("results"),empty=document.getElementById("empty"),overview=document.getElementById("overview");
+ results.innerHTML="";empty.classList.remove("show");overview.classList.remove("show");setLoading(true);document.getElementById("statusText").textContent="Verifying claim…";
+ try{
+  const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q})});updateQuota(res);
+  const data=await res.json();
+  if(res.status===429){document.getElementById("emptyText").innerHTML='<span class="error">Daily limit reached.</span> You can make up to 5 fact-check questions per day. Please try again tomorrow.';empty.classList.add("show");document.getElementById("statusText").textContent="Daily limit reached";return}
+  if(!res.ok)throw new Error(data.error||"Verification failed");
+  if(!Array.isArray(data.responses)||!data.responses.length)throw new Error(data.error||"No verifiable claim detected.");
+  currentResults=data.responses;
+  const r=data.responses[0].result||{};document.getElementById("overviewText").innerHTML=`<strong>${esc(labels[(r.verdict||"uncertain").toLowerCase()]||"Uncertain")}</strong> · ${esc(r.confidence??50)}% confidence. ${esc(r.explanation||"")}`;
+  overview.classList.add("show");results.innerHTML=data.responses.map(renderCard).join("");
+  document.getElementById("statusText").textContent=`Checked ${data.responses.length} claim${data.responses.length===1?"":"s"}.`;
+  document.getElementById("sourceStatus").textContent=`${data.responses.reduce((n,x)=>n+(x.result?.sources?.length||0),0)} sources reviewed`;
+ }catch(e){document.getElementById("emptyText").innerHTML=`<span class="error">${esc(e.message||"Verification failed.")}</span>`;empty.classList.add("show");document.getElementById("statusText").textContent="Verification unavailable";}finally{setLoading(false)}
+}
+document.getElementById("claimInput").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")checkClaim()});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+flask>=3.1,<4
+gunicorn>=23,<24
+flask-limiter>=3.8,<4
+bleach>=6.2,<7
+python-dotenv>=1.0,<2
+requests>=2.32,<3
+groq>=0.31,<1
+tavily-python>=0.7,<1
+feedparser>=6.0,<7

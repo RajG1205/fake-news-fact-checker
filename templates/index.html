@@ -96,7 +96,7 @@ textarea{min-height:118px;padding:23px 24px;font-size:15px}
       <button class="news-filter" data-filter="world" onclick="filterNews('world')">World</button>
       <button class="news-filter" data-filter="business" onclick="filterNews('business')">Business</button>
       <button class="news-filter" data-filter="technology" onclick="filterNews('technology')">Technology</button>
-      <button class="news-filter" data-filter="science" onclick="filterNews('science')">Science</button>
+      <button class="news-filter" data-filter="science" onclick="filterNews('science')">Science</button><button class="news-filter" data-filter="health" onclick="filterNews('health')">Health</button>
     </div>
     <div id="newsContent" class="news-loading">Loading live headlines…</div>
   </section>
@@ -156,7 +156,7 @@ async function checkClaim(){
 document.getElementById("claimInput").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")checkClaim()});
 let liveNewsItems=[];let activeNewsFilter="all";let newsTimer=300;
 function formatNewsTime(v){if(!v)return"Latest";const d=new Date(v);return Number.isNaN(d.getTime())?v:d.toLocaleString([], {month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});}
-function newsCategory(n){const s=((n.category||"")+" "+(n.title||"")+" "+(n.source||"")).toLowerCase();if(s.includes("india")||s.includes("delhi")||s.includes("mumbai")||s.includes("modi")||s.includes("rbi"))return"india";if(s.includes("business")||s.includes("market")||s.includes("stock")||s.includes("economy")||s.includes("bank"))return"business";if(s.includes("technology")||s.includes("tech")||s.includes("ai")||s.includes("cyber"))return"technology";if(s.includes("science")||s.includes("space")||s.includes("climate")||s.includes("health"))return"science";return"world"}
+function newsCategory(n){const raw=((n.category||"")+"").toLowerCase();if(raw==="india")return"india";if(raw==="business"||raw==="economy")return"business";if(raw==="technology")return"technology";if(raw==="science")return"science";if(raw==="health")return"health";const s=((n.title||"")+" "+(n.source||"")).toLowerCase();if(/india|indian|delhi|mumbai|maharashtra|modi|rbi/.test(s))return"india";if(/market|stock|economy|inflation|bank|finance|trade/.test(s))return"business";if(/technology|tech|ai|chip|cyber|software/.test(s))return"technology";if(/health|vaccine|medical|hospital|disease|virus/.test(s))return"health";if(/science|space|climate|nasa|research/.test(s))return"science";return"world"}
 function renderNews(items){
  liveNewsItems=Array.isArray(items)?items.slice(0,20):[];
  const box=document.getElementById("newsContent");

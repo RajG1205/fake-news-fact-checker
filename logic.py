@@ -58,6 +58,8 @@ NEWS_FEEDS = {
     "Technology": ["https://feeds.bbci.co.uk/news/technology/rss.xml"],
     "Health": ["https://feeds.bbci.co.uk/news/health/rss.xml"],
     "Economy": ["https://www.cnbc.com/id/100003114/device/rss/rss.html"],
+    "India": ["https://www.thehindu.com/news/national/feeder/default.rss", "https://indianexpress.com/section/india/feed/"],
+    "Business": ["https://www.thehindu.com/business/feeder/default.rss", "https://indianexpress.com/section/business/feed/"],
 }
 
 STOP_WORDS = {
@@ -307,9 +309,10 @@ def get_fallback_response(claim, verdict="UNCERTAIN", explanation=""):
 
 def _infer_category(title, default="World"):
     lowered = title.lower()
+    if any(w in lowered for w in ["india", "indian", "delhi", "mumbai", "maharashtra", "modi", "parliament", "supreme court"]): return "India"
     if any(w in lowered for w in ["tech", "ai", "chip", "cyber", "software", "data", "google", "apple", "microsoft", "robot"]): return "Technology"
     if any(w in lowered for w in ["health", "vaccine", "fda", "cancer", "hospital", "disease", "virus", "medical", "doctor", "medicine"]): return "Health"
-    if any(w in lowered for w in ["market", "economy", "inflation", "bank", "rate", "stocks", "finance", "trade", "gdp", "dollar", "crypto"]): return "Economy"
+    if any(w in lowered for w in ["market", "economy", "inflation", "bank", "rate", "stocks", "finance", "trade", "gdp", "dollar", "crypto"]): return "Business"
     if any(w in lowered for w in ["climate", "space", "nasa", "planet", "orbit", "energy", "science", "study", "research", "physics"]): return "Science"
     return default
 
@@ -333,7 +336,7 @@ def get_breaking_news():
             for feed in feeds:
                 try:
                     parsed = feedparser.parse(feed)
-                    for entry in parsed.entries[:3]:
+                    for entry in parsed.entries[:8]:
                         title = getattr(entry, "title", "").strip()
                         link = getattr(entry, "link", "#")
                         if title and not any(x["title"] == title for x in headlines):

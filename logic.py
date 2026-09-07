@@ -36,8 +36,8 @@ try:
 except ImportError:
     feedparser = None
 
-PRIMARY_MODEL = "llama-3.3-70b-versatile"
-FALLBACK_MODELS = ["llama3-70b-8192", "mixtral-8x7b-32768", "gemma2-9b-it"]
+PRIMARY_MODEL = "openai/gpt-oss-120b"
+FALLBACK_MODELS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "openai/gpt-oss-20b"]
 MAX_SOURCES = 24
 MAX_CLAIM_LENGTH = 1000
 _CACHE_MAX_ENTRIES = 500
@@ -79,7 +79,7 @@ if TAVILY_API_KEY and TavilyClient is not None:
         tavily_client = TavilyClient(api_key=TAVILY_API_KEY)
     except Exception as exc:
         logger.warning("Tavily initialization failed: %s", exc)
-LIVE_MODE = groq_client is not None and tavily_client is not None
+LIVE_MODE = tavily_client is not None
 logger.info("VerifyAI live mode=%s", LIVE_MODE)
 
 

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#060b12"><meta name="description" content="VerifyAI — evidence-assisted fact checking with live news and trusted sources.">
+<meta name="theme-color" content="#f7f9fc"><meta name="description" content="Check claims against available evidence and inspect source links with VerifyAI."><meta property="og:title" content="VerifyAI | Evidence-based fact checking"><meta property="og:description" content="Review claims, evidence and source links."><meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
-<title>VerifyAI — Truth Beyond Noise</title>
+<title>VerifyAI | Evidence-based fact checking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -42,32 +42,65 @@ h1{font-size:clamp(58px,6vw,78px);line-height:.98;max-width:650px;margin:20px 0 
 .footer{margin-top:20px;padding-top:28px}
 @media(max-width:900px){.nav{position:static;transform:none}.hero{grid-template-columns:1fr}.hero-visual{min-height:400px}.news-grid{grid-template-columns:1fr 1fr}.news-item.featured{grid-column:span 2;grid-row:auto}}
 @media(max-width:620px){.nav{display:none}.hero{padding-left:0;padding-right:0}.hero-visual{min-height:320px}.orb{width:290px;height:290px}.float-card{min-width:125px}.fc1{left:0}.fc2{right:0}.fc3{left:5%}.search-wrap{padding:0}.quick{margin-top:38px}.news-grid{grid-template-columns:1fr}.news-item.featured{grid-column:auto}.news-item.featured .news-art{height:135px}}
+
+/* Accessible light theme and responsive layout */
+:root{--bg:#f6f8fc;--panel:#fff;--panel2:#f8faff;--text:#15243a;--muted:#5f6f83;--line:#dce4ef;--blue:#356fe0;--cyan:#1599b5;--purple:#6c59c9;--green:#167d5a;--red:#c43c4b;--amber:#946014;--max:1160px}
+html{scroll-behavior:auto;scroll-padding-top:84px}
+body{background:linear-gradient(135deg,#fff 0%,#f7f9fd 54%,#edf3fc 100%);color:var(--text)}
+body:before,body:after{display:none}
+.topbar{background:rgba(255,255,255,.94);border-bottom:1px solid #e2e8f1;backdrop-filter:blur(12px)}
+.brand strong{color:#17263d}.brand small{color:#65748a}.brand-logo{width:42px;height:42px;object-fit:contain}
+.nav a{color:#506179}.nav a:hover,.nav a.active{color:#214f9d;background:#edf3ff}
+.nav a.active:after{background:#4c7fe3;box-shadow:none}
+.quota{color:#5e6e82;background:#fff;border-color:#dbe4f0}.quota strong{color:#1e3f76}
+h1{color:#16253b}h1 em{background:linear-gradient(90deg,#285fb8,#6179c9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:#586a80}.hero-points{color:#52657c}.hero-points b{color:#16815e}
+.eyebrow{color:#315f9f;background:#edf4ff;border-color:#d6e4fa}.eyebrow i{background:#3d80dd;box-shadow:none}
+.hero-visual{min-height:360px}.brand-showcase{width:min(360px,90%);aspect-ratio:1;display:grid;place-items:center;align-content:center;gap:18px;border:1px solid #e1e8f3;border-radius:28px;background:radial-gradient(circle at 50% 15%,#fff 0,#f5f8ff 55%,#eaf1fb 100%);box-shadow:0 22px 60px rgba(39,72,125,.09)}.brand-showcase img{width:190px;max-width:70%;height:auto}.brand-showcase p{margin:0;color:#526985;font-size:13px;font-weight:600}
+.searchbox{background:#fff;border-color:#d8e2f0;box-shadow:0 12px 38px rgba(37,66,111,.08)}.searchbox:focus-within{border-color:#7ba1e7;box-shadow:0 12px 38px rgba(37,66,111,.12)}
+textarea{color:#1a2a42}.primary{border-radius:10px;background:#326fdb;box-shadow:none;color:#fff}.primary:hover{transform:none;filter:brightness(1.04)}
+.example{background:#fff;border-color:#dce5f1;color:#52657c}.example:hover{background:#edf4ff;border-color:#9db9e8;color:#244d8c;transform:none}
+.quick-card,.news-item,.card,.overview,.loading,.empty,.news-loading,.news-empty{background:#fff;border-color:#e0e7f0;box-shadow:0 8px 24px rgba(34,59,96,.04);color:var(--text)}
+.quick-card:hover,.news-item:hover{transform:none;box-shadow:0 12px 30px rgba(34,59,96,.08);border-color:#c6d6ec}
+.quick-card strong{color:#1a2b43}.quick-card p{color:#607187}.quick-icon{background:#eef4ff;color:#376bb9}
+.news-title{color:#17263d}.news-kicker,.news-updated{color:#65758b}.news-filter{background:#fff;border-color:#dce5f0;color:#56677e}.news-filter.active{background:#eaf1ff;border-color:#b8cef1;color:#2858a3;box-shadow:none}
+.news-art{background:linear-gradient(135deg,#edf3fc,#e2ebf8)!important}.news-art:after{display:none}
+.news-source{color:#61738a}.news-item h3{color:#1a2a41}.news-meta{color:#6b7c91}.news-arrow{color:#376fce}
+.news-refresh{background:#fff;border-color:#dbe4ef;color:#50627a}.news-refresh:hover{border-color:#9eb9e4;color:#2457a5}
+.stats,.stat,.statusbar{background:#fff;border-color:#e0e7f0}.stat b{color:#1c2e47}.stat span{color:#65758a}
+.card{box-shadow:0 8px 25px rgba(30,58,99,.06)}.claim{color:#17263d}.meta,.explain{color:#566980}.highlights{border-color:#e5ebf3}.highlights-title{color:#60748c}.highlights ul{color:#43566f}.source{border-color:#e5ebf3;color:#315f9d}.source small{color:#6d7d91}.ghost{color:#52657c}.ghost:hover{color:#285fae}
+.footer{border-color:#e0e7f0;color:#63738a}.footer strong{color:#1a2a42}.footer-brand{text-decoration:none}.footer p{margin:5px 0 12px}.footer-links{display:flex;flex-wrap:wrap;gap:16px}.footer-links a{color:#42699e;text-decoration:none}.footer-links a:hover{text-decoration:underline}
+.toast{background:#173b2e;border-color:#b7e3ce;color:#fff}
+.menu-toggle{display:none;background:#fff;border:1px solid #dbe4ef;border-radius:9px;width:42px;height:40px;padding:10px;cursor:pointer}.menu-toggle span{display:block;height:2px;background:#344b69;margin:4px 0;border-radius:2px}
+.claim-label{display:block;align-self:center;color:#65758a;font-size:12px;padding:0 15px}.searchbox{grid-template-columns:180px 1fr 54px}.searchbox textarea{grid-column:2}.searchbox .primary{grid-column:3}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.topbar-inner{position:relative}.menu-toggle{display:block;order:3}.quota{display:none}.nav{display:none;position:absolute;left:16px;right:16px;top:calc(100% + 8px);transform:none;background:#fff;border:1px solid #dce5f0;border-radius:12px;padding:10px;box-shadow:0 14px 35px rgba(24,47,82,.12);flex-direction:column;align-items:stretch;gap:2px}.nav.open{display:flex}.nav a{padding:11px 12px}.nav a.active:after{display:none}.hero{grid-template-columns:1fr}.hero-visual{min-height:300px}.brand-showcase{width:300px}.news-grid{grid-template-columns:1fr 1fr}.news-item.featured{grid-column:span 2;grid-row:auto}}
+@media(max-width:620px){.topbar{height:64px}.topbar-inner,.shell{padding-left:16px;padding-right:16px}.brand-logo{width:36px;height:36px}.brand strong{font-size:18px}.hero{padding-top:32px;min-height:auto}h1{font-size:clamp(42px,12vw,56px)}.lead{font-size:14px}.hero-visual{min-height:260px}.brand-showcase{width:250px;border-radius:20px}.brand-showcase img{width:145px}.search-wrap{padding:0}.searchbox{grid-template-columns:1fr;gap:6px;padding:12px}.claim-label{padding:2px 4px}.searchbox textarea{grid-column:1;min-height:72px;padding:8px 4px}.searchbox .primary{grid-column:1;width:100%;height:44px;border-radius:9px;font-size:13px}.primary:after{content:none}.quick{grid-template-columns:1fr 1fr;gap:10px}.quick-card{grid-template-columns:32px 1fr;column-gap:9px;padding:13px}.quick-icon{width:30px;height:30px}.quick-card:after{display:none}.quick-card p{font-size:10px}.news-grid{grid-template-columns:1fr}.news-item.featured{grid-column:auto}.news-head{align-items:flex-start;gap:10px}.news-title{font-size:23px}.news-updated{display:none}.footer{display:block}.footer>div+div{margin-top:18px}.card{padding:18px}.card-top{grid-template-columns:1fr}.badge{justify-self:start}.searchbox textarea{max-width:100%}body{overflow-x:hidden}}
 </style>
 </head>
 <body>
 <header class="topbar"><div class="topbar-inner">
-<a class="brand" href="/" aria-label="VerifyAI home"><div class="mark"><svg viewBox="0 0 42 42" fill="none"><path d="M5 10.5 15.5 30 21 19.5 26.5 30 37 10.5" stroke="url(#vg)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 12.5 21 35 32 12.5" stroke="#6d5cff" stroke-width="2.4" stroke-linecap="round" opacity=".65"/><defs><linearGradient id="vg" x1="5" y1="10" x2="37" y2="31"><stop stop-color="#5aa2ff"/><stop offset=".55" stop-color="#5f7dff"/><stop offset="1" stop-color="#8a5cff"/></linearGradient></defs></svg></div><div><strong>VerifyAI</strong><small>TRUTH BEYOND NOISE</small></div></a>
-<nav class="nav"><a class="active" href="#home">Home</a><a href="#fact-check">Fact Check</a><a href="#live-news">Live News</a><a href="#about">About</a></nav>
-<div class="quota"><strong id="quotaText">5</strong> checks left today</div>
+<a class="brand" href="/" aria-label="VerifyAI home"><img class="brand-logo" src="{{ url_for('static', filename='verifyai-logo.svg') }}" alt=""><div><strong>VerifyAI</strong><small>Evidence-based fact checking</small></div></a>
+<button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="nav" id="siteNav"><a class="active" href="#home">Home</a><a href="#fact-check">Fact check</a><a href="#live-news">News</a><a href="#about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+<div class="quota" aria-live="polite">Daily limit: <strong id="quotaText">5</strong> checks remaining</div>
 </div></header>
 <main class="shell">
 <section class="hero" id="home">
 <div class="hero-copy"><div class="eyebrow"><i></i> AI-POWERED FACT CHECKING</div><h1>Verify Before<br><em>You Believe.</em></h1><p class="lead">Detect misinformation, analyze claims, and see the evidence behind today's headlines. A faster, clearer way to make informed decisions.</p><div class="hero-points"><span><b>◉</b> Real-time analysis</span><span><b>◈</b> Trusted sources</span><span><b>✦</b> Evidence-led insights</span></div></div>
-<div class="hero-visual" aria-hidden="true"><div class="glow"></div><div class="orb" aria-hidden="true"><svg viewBox="0 0 420 420" style="position:absolute;inset:0;width:100%;height:100%;opacity:.58"><g fill="none" stroke="#68bdf1" stroke-width=".7"><ellipse cx="210" cy="210" rx="190" ry="68"/><ellipse cx="210" cy="210" rx="190" ry="125"/><ellipse cx="210" cy="210" rx="190" ry="170"/><ellipse cx="210" cy="210" rx="68" ry="190"/><ellipse cx="210" cy="210" rx="125" ry="190"/><ellipse cx="210" cy="210" rx="170" ry="190"/></g><g fill="#66c8ff"><circle cx="125" cy="132" r="2"/><circle cx="277" cy="99" r="1.6"/><circle cx="306" cy="224" r="2"/><circle cx="174" cy="285" r="1.5"/><circle cx="94" cy="215" r="1.3"/><circle cx="246" cy="164" r="1.2"/></g></svg></div><div class="float-card fc1"><span class="state ok">✓</span><strong>REAL NEWS</strong><span>Evidence supports claim</span></div><div class="float-card fc2"><span class="state warn">!</span><strong>NEEDS REVIEW</strong><span>More context required</span></div><div class="float-card fc3"><span class="state bad">×</span><strong>FALSE CLAIM</strong><span>No credible evidence</span></div></div>
+<div class="hero-visual"><div class="brand-showcase"><img src="{{ url_for('static', filename='verifyai-logo.svg') }}" alt="VerifyAI shield, article and search mark"><p>Evidence first. Verdict second.</p></div></div>
 </section>
-<section class="search-wrap" id="fact-check"><div class="searchbox"><textarea id="claimInput" maxlength="5000" rows="2" placeholder="Paste a news link, headline, or claim to verify…"></textarea><button class="primary" id="checkBtn" onclick="checkClaim()">Verify claim&nbsp; →</button></div><div class="examples"><button class="example" onclick="useExample('Did NASA fake the moon landing?')">Moon landing</button><button class="example" onclick="useExample('Do vaccines cause autism?')">Vaccine claim</button><button class="example" onclick="useExample('Is climate change primarily caused by human activity?')">Climate</button><button class="example" onclick="useExample('Does 5G cause COVID-19?')">5G claim</button></div></section>
+<section class="search-wrap" id="fact-check"><div class="searchbox"><label class="claim-label" for="claimInput">Claim or headline to check</label><textarea id="claimInput" maxlength="5000" rows="2" aria-describedby="claimHelp"></textarea><span id="claimHelp" class="sr-only">Enter a claim or headline. Press Enter to submit.</span><button class="primary" id="checkBtn" onclick="checkClaim()" aria-label="Verify claim">Verify claim</button></div><div class="examples"><button class="example" onclick="useExample('Did NASA fake the moon landing?')">Moon landing</button><button class="example" onclick="useExample('Do vaccines cause autism?')">Vaccine claim</button><button class="example" onclick="useExample('Is climate change primarily caused by human activity?')">Climate</button><button class="example" onclick="useExample('Does 5G cause COVID-19?')">5G claim</button></div></section>
 <section class="quick" id="features">
-<a class="quick-card" href="#fact-check"><div class="quick-icon q1">▤</div><strong>Fact Check</strong><p>Verify claims and viral content against available evidence.</p></a>
-<a class="quick-card" href="#live-news"><div class="quick-icon q2">◉</div><strong>Live News</strong><p>Stay updated with current headlines from news feeds.</p></a>
-<a class="quick-card" href="#results"><div class="quick-icon q3">▥</div><strong>Evidence Insights</strong><p>Inspect evidence, sources and confidence after a check.</p></a>
-<a class="quick-card" href="#about"><div class="quick-icon q4">◇</div><strong>Media Literacy</strong><p>Pause, question and inspect before you share.</p></a>
+<a class="quick-card" href="#fact-check"><div class="quick-icon q1" aria-hidden="true">1</div><strong>Fact Check</strong><p>Verify claims and viral content against available evidence.</p></a>
+<a class="quick-card" href="#live-news"><div class="quick-icon q2" aria-hidden="true">2</div><strong>Live News</strong><p>Stay updated with current headlines from news feeds.</p></a>
+<a class="quick-card" href="#results"><div class="quick-icon q3" aria-hidden="true">3</div><strong>Evidence Insights</strong><p>Inspect evidence, sources and confidence after a check.</p></a>
+<a class="quick-card" href="#about"><div class="quick-icon q4" aria-hidden="true">4</div><strong>Media Literacy</strong><p>Pause, question and inspect before you share.</p></a>
 </section>
 <section class="news-wrap" id="live-news" aria-labelledby="newsTitle"><div class="news-head"><div><div class="news-kicker"><span class="live-dot news-pulse"></span><b>LIVE</b> · VERIFIED NEWS DESK</div><div class="news-title" id="newsTitle">What the world is talking about</div></div><div class="news-tools"><span class="news-updated" id="newsUpdated">Updating…</span><button class="news-refresh" onclick="loadNews(true)">↻ Refresh</button></div></div><div class="news-controls" id="newsFilters"><button class="news-filter active" data-filter="all" onclick="filterNews('all')">All</button><button class="news-filter" data-filter="world" onclick="filterNews('world')">World</button><button class="news-filter" data-filter="business" onclick="filterNews('business')">Business</button><button class="news-filter" data-filter="technology" onclick="filterNews('technology')">Technology</button><button class="news-filter" data-filter="science" onclick="filterNews('science')">Science</button></div><div id="newsContent" class="news-loading">Loading live headlines…</div></section>
 <section class="loading" id="loading"><div class="spinner"></div><p>Checking sources and verifying the claim…</p></section><section class="empty" id="empty"><p id="emptyText">No result returned. Try a more specific claim.</p></section><section id="results"></section>
-<footer class="footer" id="about"><div><strong>VerifyAI</strong> · Truth beyond noise</div><div>Evidence-led fact checking · Live news · No authentication required</div></footer>
+<footer class="footer" id="about"><div><a class="footer-brand" href="/"><strong>VerifyAI</strong></a><p>Evidence-assisted fact checking. Review sources before sharing.</p><nav class="footer-links" aria-label="Footer"><a href="/privacy">Privacy policy</a><a href="/terms">Terms of use</a><a href="#fact-check">Fact check</a></nav></div><div>© <span id="copyrightYear"></span> VerifyAI. All rights reserved.</div></footer>
 </main>
 <script>
-let currentResults=[];
+let currentResults=[];\ndocument.getElementById("copyrightYear").textContent=new Date().getFullYear();
 const labels={true:"Verified true",false:"False claim",misleading:"Misleading",uncertain:"Needs verification"};
 const esc=s=>{const d=document.createElement("div");d.textContent=s??"";return d.innerHTML};
 function safeUrl(u){try{const x=new URL(u);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return "#"}}
@@ -100,7 +133,7 @@ async function checkClaim(){
   if(!res.ok)throw new Error(data.error||"Verification failed");
   if(!Array.isArray(data.responses)||!data.responses.length)throw new Error(data.error||"No verifiable claim detected.");
   currentResults=data.responses;
-  results.innerHTML=data.responses.map(renderCard).join("");
+  results.innerHTML=data.responses.map(renderCard).join("");toast("Fact-check completed. Review the evidence and sources.");
  }catch(e){document.getElementById("emptyText").innerHTML=`<span class="error">${esc(e.message||"Verification failed.")}</span>`;empty.classList.add("show");}finally{setLoading(false)}
 }
 document.getElementById("claimInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();checkClaim()}});

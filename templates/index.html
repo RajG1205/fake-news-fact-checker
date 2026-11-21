@@ -58,7 +58,7 @@ async function checkClaim(){
  const results=document.getElementById("results"),empty=document.getElementById("empty");
  results.innerHTML="";empty.classList.remove("show");setLoading(true);
  try{
-  const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q})});updateQuota(res);
+  const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q})});
   const data=await res.json();
   if(res.status===429){document.getElementById("emptyText").innerHTML='<span class="error">Daily limit reached.</span> You can make up to 5 fact-check questions per day. Please try again tomorrow.';empty.classList.add("show");return}
   if(!res.ok)throw new Error(data.error||"Verification failed");

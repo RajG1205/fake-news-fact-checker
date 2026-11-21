@@ -69,6 +69,21 @@ def home():
     return render_template("index.html")
 
 
+
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
+
+@app.errorhandler(404)
+def page_not_found(_):
+    return render_template("404.html"), 404
+
 @app.route("/health")
 @limiter.exempt
 def health():

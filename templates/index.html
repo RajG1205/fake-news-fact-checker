@@ -81,7 +81,7 @@ textarea{color:#1a2a42}.primary{border-radius:10px;background:#326fdb;box-shadow
 <header class="topbar"><div class="topbar-inner">
 <a class="brand" href="/" aria-label="VerifyAI home"><img class="brand-logo" src="{{ url_for('static', filename='verifyai-logo.svg') }}" alt=""><div><strong>VerifyAI</strong><small>Evidence-based fact checking</small></div></a>
 <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="nav" id="siteNav"><a class="active" href="#home">Home</a><a href="#fact-check">Fact check</a><a href="#live-news">News</a><a href="#about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
-<div class="quota" aria-live="polite">Daily limit: <strong id="quotaText">5</strong> checks remaining</div>
+
 </div></header>
 <main class="shell">
 <section class="hero" id="home">
@@ -95,7 +95,7 @@ textarea{color:#1a2a42}.primary{border-radius:10px;background:#326fdb;box-shadow
 <a class="quick-card" href="#results"><div class="quick-icon q3" aria-hidden="true">3</div><strong>Evidence Insights</strong><p>Inspect evidence, sources and confidence after a check.</p></a>
 <a class="quick-card" href="#about"><div class="quick-icon q4" aria-hidden="true">4</div><strong>Media Literacy</strong><p>Pause, question and inspect before you share.</p></a>
 </section>
-<section class="news-wrap" id="live-news" aria-labelledby="newsTitle"><div class="news-head"><div><div class="news-kicker"><span class="live-dot news-pulse"></span><b>LIVE</b> · VERIFIED NEWS DESK</div><div class="news-title" id="newsTitle">What the world is talking about</div></div><div class="news-tools"><span class="news-updated" id="newsUpdated">Updating…</span><button class="news-refresh" onclick="loadNews(true)">↻ Refresh</button></div></div><div class="news-controls" id="newsFilters"><button class="news-filter active" data-filter="all" onclick="filterNews('all')">All</button><button class="news-filter" data-filter="world" onclick="filterNews('world')">World</button><button class="news-filter" data-filter="business" onclick="filterNews('business')">Business</button><button class="news-filter" data-filter="technology" onclick="filterNews('technology')">Technology</button><button class="news-filter" data-filter="science" onclick="filterNews('science')">Science</button></div><div id="newsContent" class="news-loading">Loading live headlines…</div></section>
+<section class="news-wrap" id="live-news" aria-labelledby="newsTitle"><div class="news-head"><div><div class="news-kicker"><span class="live-dot news-pulse"></span><b>LIVE</b> · NEWS FEEDS</div><div class="news-title" id="newsTitle">What the world is talking about</div></div><div class="news-tools"><span class="news-updated" id="newsUpdated">Updating…</span><button class="news-refresh" onclick="loadNews(true)">↻ Refresh</button></div></div><div class="news-controls" id="newsFilters"><button class="news-filter active" data-filter="all" onclick="filterNews('all')">All</button><button class="news-filter" data-filter="world" onclick="filterNews('world')">World</button><button class="news-filter" data-filter="business" onclick="filterNews('business')">Business</button><button class="news-filter" data-filter="technology" onclick="filterNews('technology')">Technology</button><button class="news-filter" data-filter="science" onclick="filterNews('science')">Science</button></div><div id="newsContent" class="news-loading">Loading live headlines…</div></section>
 <section class="loading" id="loading"><div class="spinner"></div><p>Checking sources and verifying the claim…</p></section><section class="empty" id="empty"><p id="emptyText">No result returned. Try a more specific claim.</p></section><section id="results"></section>
 <footer class="footer" id="about"><div><a class="footer-brand" href="/"><strong>VerifyAI</strong></a><p>Evidence-assisted fact checking. Review sources before sharing.</p><nav class="footer-links" aria-label="Footer"><a href="/privacy">Privacy policy</a><a href="/terms">Terms of use</a><a href="#fact-check">Fact check</a></nav></div><div>© <span id="copyrightYear"></span> VerifyAI. All rights reserved.</div></footer>
 </main>
@@ -107,7 +107,7 @@ function safeUrl(u){try{const x=new URL(u);return ["http:","https:"].includes(x.
 function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
 function useExample(v){document.getElementById("claimInput").value=v;document.getElementById("claimInput").focus()}
 function setLoading(on){document.getElementById("loading").classList.toggle("show",on);document.getElementById("checkBtn").disabled=on}
-function updateQuota(res){const h=res.headers.get("X-RateLimit-Remaining");if(h!==null)document.getElementById("quotaText").textContent=`${h} fact-check${h==="1"?"":"s"} left today`}
+function updateQuota(res){const h=res.headers.get("X-RateLimit-Remaining");if(h!==null)}
 function renderCard(item,i){
  const r=item.result||{};const v=(r.verdict||"UNCERTAIN").toLowerCase();const conf=Number.isFinite(Number(r.confidence))?Math.max(0,Math.min(100,Number(r.confidence))):50;
  const sources=Array.isArray(r.sources)?r.sources:[], hi=Array.isArray(r.highlights)?r.highlights:[], qs=Array.isArray(r.quotes)?r.quotes:[];
@@ -150,7 +150,7 @@ function renderNews(items){
  box.innerHTML=visible.map((n,i)=>{
    const image=safeUrl(n.image||"");
    const art=image&&image!=="#" ? ' style="background-image:linear-gradient(180deg,rgba(4,14,24,.05),rgba(4,12,20,.72)),url(&quot;'+esc(image)+'&quot;)"' : "";
-   return '<a class="news-item '+(i===0?'featured':'')+'" href="'+esc(safeUrl(n.url))+'" target="_blank" rel="noopener noreferrer"><div class="news-art"'+art+'></div><div class="news-source">'+(i===0?'<span class="live-dot"></span> ':'')+esc(n.source||n.domain||"News desk")+' · '+esc(n.category||newsCategory(n))+'</div><h3>'+esc(n.title||"Latest headline")+'</h3><div class="news-meta"><span>'+esc(formatNewsTime(n.publishedAt||n.published||""))+'</span><span class="news-arrow">Read source ↗</span></div></a>';
+   return '<a class="news-item '+(i===0?'featured':'')+'" href="'+esc(safeUrl(n.url))+'" target="_blank" rel="noopener noreferrer"><div class="news-art"'+art+'></div><div class="news-source">'+(i===0?'<span class="live-dot"></span> ':'')+esc(n.source||n.domain||"News desk")+' · '+esc(n.category||newsCategory(n))+'</div><h3>'+esc(n.title||"")+'</h3><div class="news-meta"><span>'+esc(formatNewsTime(n.publishedAt||n.published||""))+'</span><span class="news-arrow">Read source ↗</span></div></a>';
  }).join("");
  document.getElementById("newsUpdated").textContent="Updated just now";
 }

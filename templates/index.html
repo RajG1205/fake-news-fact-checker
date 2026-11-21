@@ -148,9 +148,11 @@ function renderNews(items){
  if(!visible.length){box.className="news-grid";box.innerHTML='<div class="news-empty">No live stories in this section right now.</div>';return}
  box.className="news-grid";
  box.innerHTML=visible.map((n,i)=>{
-   const image=safeUrl(n.image||"");
-   const art=image&&image!=="#" ? ' style="background-image:linear-gradient(180deg,rgba(4,14,24,.05),rgba(4,12,20,.72)),url(&quot;'+esc(image)+'&quot;)"' : "";
-   return '<a class="news-item '+(i===0?'featured':'')+'" href="'+esc(safeUrl(n.url))+'" target="_blank" rel="noopener noreferrer"><div class="news-art"'+art+'></div><div class="news-source">'+(i===0?'<span class="live-dot"></span> ':'')+esc(n.source||n.domain||"News desk")+' · '+esc(n.category||newsCategory(n))+'</div><h3>'+esc(n.title||"")+'</h3><div class="news-meta"><span>'+esc(formatNewsTime(n.publishedAt||n.published||""))+'</span><span class="news-arrow">Read source ↗</span></div></a>';
+   const href=safeUrl(n.url);
+   const tag=href!=="#"?"a":"div";
+   const attrs=href!=="#"? ' href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"':"";
+   const close=href!=="#"?"</a>":"</div>";
+   return '<'+tag+' class="news-item '+(i===0?'featured':'')+'"'+attrs+'><div class="news-art"></div><div class="news-source">'+(i===0?'<span class="live-dot"></span> ':'')+esc(n.source||n.domain||"News source")+' · '+esc(n.category||newsCategory(n))+'</div><h3>'+esc(n.title||"")+'</h3><div class="news-meta"><span>'+esc(formatNewsTime(n.publishedAt||n.published||""))+'</span><span class="news-arrow">'+(href!=="#"?"Open source ↗":"Source link unavailable")+'</span></div>'+close;
  }).join("");
  document.getElementById("newsUpdated").textContent="Updated just now";
 }
